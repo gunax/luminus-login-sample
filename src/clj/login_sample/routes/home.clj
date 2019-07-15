@@ -7,7 +7,11 @@
     [ring.util.http-response :as response]))
 
 (defn home-page [request]
-  (layout/render request "home.html" {:docs (-> "docs/docs.md" io/resource slurp)}))
+  (let [session (:session request)]
+  (layout/render request "home.html" 
+    {:docs (-> "docs/docs.md" io/resource slurp)
+     :username (:username session)}
+    )))
 
 (defn about-page [request]
   (layout/render request "about.html"))
@@ -17,5 +21,6 @@
    {:middleware [middleware/wrap-csrf
                  middleware/wrap-formats]}
    ["/" {:get home-page}]
-   ["/about" {:get about-page}]])
+   ["/about" {:get about-page}]
+   ])
 
