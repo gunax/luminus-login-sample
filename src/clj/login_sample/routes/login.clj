@@ -8,7 +8,9 @@
     [ring.util.response :refer [response]]))
 
 (defn login-page [request]
-  (layout/render request "login.html"))
+  (layout/render request "login.html" 
+      {:username (get-in request [:session :username])}
+  ))
 
 (defn login! [request]
   (let [
