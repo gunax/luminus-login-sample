@@ -1,7 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
     {% if username %}
-      <div class=content>You are logged in as {{username}}</div>
+      <div class=content>
+        <div>You are logged in as {{username}}</div>
+        <form method="POST" action="/logout">
+          {% csrf-field %}
+          <input type="submit" class="button is-primary" value="Logout" />
+        </form>
+      </div>
     {% else %}
       <div class="content">
           <form method="POST" action="/">

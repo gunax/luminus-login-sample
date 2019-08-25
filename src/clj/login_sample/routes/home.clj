@@ -23,11 +23,19 @@
                     (assoc :session updated-session))))
   ))
 
+  (defn logout! [request]
+    (do 
+      (assoc request :session nil)
+      (layout/render nil "home.html")
+    )
+  )
+
 (defn home-routes []
   [""
    {:middleware [middleware/wrap-csrf
                  middleware/wrap-formats]}
    ["/" {:get home-page
          :post login!}]
+   ["/logout" {:post logout!}]
    ])
 
