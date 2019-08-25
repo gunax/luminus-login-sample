@@ -3,7 +3,7 @@
     [login-sample.middleware :as middleware]
     [login-sample.layout :refer [error-page]]
     [login-sample.routes.home :refer [home-routes]]
-    [login-sample.routes.login :refer [login-routes]]
+    [login-sample.routes.about :refer [about-routes]]
     [reitit.ring :as ring]
     [ring.middleware.content-type :refer [wrap-content-type]]
     [ring.middleware.webjars :refer [wrap-webjars]]
@@ -18,7 +18,7 @@
   :start
   (ring/ring-handler
     (ring/router
-      [(home-routes) (login-routes)])
+      [(home-routes) (about-routes)])
     (ring/routes
       (ring/create-resource-handler
         {:path "/"})

@@ -9,18 +9,25 @@
 (defn home-page [request]
   (let [session (:session request)]
   (layout/render request "home.html" 
-    {:docs (-> "docs/docs.md" io/resource slurp)
-     :username (:username session)}
+    {:username (:username session)}
     )))
 
-(defn about-page [request]
-  (layout/render request "about.html"))
+(defn login! [request]
+  (let [
+        username (get-in request [:form-params "username"])
+        session (:session request)]
+  (do (let [ updated-session (assoc session :username username)]
+                (-> (layout/render request "home.html" 
+                      {:username (:username updated-session)}
+                    )
+                    (assoc :session updated-session))))
+  ))
 
 (defn home-routes []
   [""
    {:middleware [middleware/wrap-csrf
                  middleware/wrap-formats]}
-   ["/" {:get home-page}]
-   ["/about" {:get about-page}]
+   ["/" {:get home-page
+         :post login!}]
    ])
 
