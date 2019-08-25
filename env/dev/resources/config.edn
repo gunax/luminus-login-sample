@@ -1,1 +1,1 @@
-{}
+{:database-url "jdbc:sqlite:db/login-sample.db"}

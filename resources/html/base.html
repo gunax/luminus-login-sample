@@ -28,6 +28,7 @@
                       <a href="/" class="navbar-item{% ifequal page "home.html" %} is-active{%endifequal%}">Home</a>
                       <a href="/login" class="navbar-item{% ifequal page "login.html" %} is-active{%endifequal%}">Login</a>
                       <a href="/about" class="navbar-item{% ifequal page "about.html" %} is-active{%endifequal%}">About</a>
+                      <div class="navbar-item navbar-end right">Hello {{username}}</div>
                   </div>
               </div>
           </div>
@@ -35,7 +36,6 @@
 
       <section class="section">
           <div class="container">
-              Hello {{username}}
               {% block content %}
               {% endblock %}
           </div>
